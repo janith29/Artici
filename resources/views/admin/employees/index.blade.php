@@ -17,7 +17,7 @@
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                     <div class="modal-dialog" role="document">
-                        <div class="modal-content">
+                        <div class="modal-content">  
                             {!! Form::open(array('route' => 'admin.employees.rep', 'enctype' =>'multipart/form-data', 'class' => 'form-inline')) !!}
                             {!! Form::token() !!}
                             <div class="modal-header">
@@ -70,30 +70,63 @@
         {{-- @foreach($users as $user) --}}
         <div class="row">
             @foreach($employees as $employee)
-                <div class="col-xs-6 col-sm-3">
-                    <div class="card">
+            <div class="col-xs-6 col-sm-3">
+                    <div class="dcard">
+                        <div class="row">
+                            <div class="dcard-header">
+                                <div class="dcard-body text-center" style="font-size: larger; color: black">
+                                    <span class="dcard-title ">{{  $employee->name}}</span><br />
+                                    <span class="dcard-title ">{{ $employee->Did }}</span><br />
+                                </div>
+                            <br/>
+                                <div class="dcard-body text-center">
+                                        <img src="\image\emp\profile\{{ $employee->emp_pic }}" alt="Pic" height="90" width="90"class="img-circle">
+                                     </div>
+                                {{-- <span class="card-img">{{ HTML::image('img/nickfrost.jpg', 'Pic') }}</span> --}}
+    
+                            </div>
+                        </div>
+                        <div class="dcard-body text-center">
+                            {!! Form::open(array('route' => ['admin.employees.delete', $employee->id], 'method' => 'DELETE')) !!}
+                            <a href="{{ route('admin.employees.show', [$employee->id]) }}" class="btn btn-primary">View</a>
+                            <br/>
+                            @if(auth()->user()->usertype != 'administrator')
+                            <a href="{{ route('admin.employees.edit', [$employee->id]) }}" class="btn btn-success">Update</a>
+                            {{-- <a href="{{ route('admin.patients.delete') }}" class="btn btn-danger">Delete</a> --}}
+                           
+                            {!! Form::button('Delete', ['class' => 'btn btn-danger', 'type' => 'submit']) !!}
+                            {!! Form::close() !!}
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                {{-- <div class="col-xs-6 col-sm-3">
+                    <div class="card bg-info text-white">
                         <div class="row">
                             <div class="card-header">
-                                <div class="col-xs-6 col-md-4 col-lg-4 vcenter emp-avator">
+                                <div class="col-xs-6 vcenter emp-avator">
+                                        <p style="text-align:center;"> 
                                     <img src="\image\emp\profile\{{ $employee->emp_pic }}" alt="Pic" height="90" width="90"class="img-circle">
+                                        </p>
                                 </div>
                                 {{-- <span class="card-img">{{ HTML::image('img/nickfrost.jpg', 'Pic') }}</span> --}}
-                                <div class="col-xs-6 col-md-8 col-lg-8 vcenter emp-details">
-                                    <span class="card-title">{{ $employee->name }}</span><br />
-                                    <span class="card-subtitle">{{ $employee->employeeType }}</span>
+                                 {{-- <div class="col   vcenter emp-details">
+                                        <p style="text-align:center;" class="card-title">   {{ $employee->name }} </p>
+                                        <p style="text-align:center;"><span class="card-subtitle">{{$employee->Did }}</span></p>
                                 </div>
+                                
                             </div>
                         </div>
                         <div class="card-body text-center">
                             {!! Form::open(array('route' => ['admin.employees.delete', $employee->id], 'method' => 'DELETE', 'onSubmit'=> 'return confirm("Do you really want to delete?");')) !!}
-                                <a href="{{ route('admin.employees.show', [$employee->id]) }}" class="btn btn-link">View</a>
+                                <a href="{{ route('admin.employees.show', [$employee->id]) }}" class="btn btn-info">View</a>
                                 <a href="{{ route('admin.employees.edit', [$employee->id]) }}" class="btn btn-success">Update</a>
                                 {{-- <a href="{{ route('admin.employees.delete') }}" class="btn btn-danger">Delete</a> --}}
-                                {!! Form::button('Delete', ['class' => 'btn btn-danger', 'type' => 'submit']) !!}
+                                {{-- {!! Form::button('Delete', ['class' => 'btn btn-danger', 'type' => 'submit']) !!}
                             {!! Form::close() !!}
                         </div>
                     </div>
-                </div>
+                </div> --}} 
                 {{-- @if(Session::has('message'))
                     <div id="myModal" class="modal fade in" style="display: block; margin-top: 160px; margin-left: 100px;">
                         <div class="modal-dialog modal-confirm">

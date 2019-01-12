@@ -21,7 +21,12 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::get('login', 'LoginController@showLoginForm')->name('login');
     Route::post('login', 'LoginController@login');
     Route::get('logout', 'LoginController@logout')->name('logout');
-
+    
+    Route::get('reset1', 'LoginController@reset1')->name('reset1');
+    Route::post('setreset', 'LoginController@setreset');
+    Route::post('setpass', 'LoginController@setpass');
+    Route::post('setnewpass', 'LoginController@setnewpass');
+    
     // Registration Routes...
     if (config('auth.users.registration')) {
         Route::get('register', 'RegisterController@showRegistrationForm')->name('register');
@@ -33,7 +38,9 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
     Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
     Route::post('password/reset', 'ResetPasswordController@reset');
-
+    Route::post('resetpass', 'ForgotPasswordController@resetpass')->name('resetpass');
+    Route::post('restnewpass', 'ForgotPasswordController@restnewpass')->name('restnewpass');
+    
     // Confirmation Routes...
     if (config('auth.users.confirm_email')) {
         Route::get('confirm/{user_by_code}', 'ConfirmController@confirm')->name('confirm');
@@ -49,7 +56,17 @@ Route::group(['namespace' => 'Auth'], function () {
  * Backend routes
  */
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => 'administrator'], function () {
-    
+    Route::get('financial/InReport','FinancialController@incomereport')->name('financial.IncomeReport');
+
+    Route::post('financial/Incomereport', 'FinancialController@displayIncomeReport');
+
+    Route::get('financial/outReport','FinancialController@Outcomereport')->name('financial.OutcomeReport');
+
+    Route::post('financial/Outcomereport', 'FinancialController@displayOutcomeReport');
+    Route::get('question_forum/qareport','QuestionsForumController@report')->name('question_forum.qareport');
+    Route::post('question_forum/qarepo', 'QuestionsForumController@QAReport');
+    Route::get('diagnosis/DiaReport','DiagnosisController@Report')->name('diagnosis.DiaReport');
+    Route::post('diagnosis/direpo', 'DiagnosisController@DiaReport');
     // Dashboard
     Route::get('/', 'DashboardController@index')->name('dashboard');
     Route::post('storereport', 'StoreController@displayReport');
@@ -95,6 +112,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('diagnosis/{diagnosis}', 'DiagnosisController@show')->name('diagnosis.show');
    
     Route::post('diagnosis/searchpationdiagnosis','DiagnosisController@searchpationdiagnosis');
+    Route::post('diagnosis/adddiagnosissketch','DiagnosisController@adddiagnosissketch');
     Route::post('diagnosis/add/adddiagnosis','DiagnosisController@store');
     Route::post('diagnosis/edit/updatediagnosis','DiagnosisController@update');
     
@@ -169,7 +187,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Route::put('financial/{employee}', 'EmployeeController@update')->name('employees.update');
 
     //Patient
-     Route::any('patientsearch','PatientController@search');
+     Route::post('patientsearch','PatientController@search');
     Route::post('patientsreport', 'PatientController@displayReport');
 
     Route::get('patient', 'PatientController@index')->name('patients');
@@ -490,7 +508,7 @@ Route::group(['prefix' => 'doctor', 'as' => 'doctor.', 'namespace' => 'doctor', 
     
 });
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('/');;
 Route::get('/aboutus', 'AboutUsController@aboutus');
 Route::get('/services', 'ServicesController@services');
 Route::get('/contact', 'ContactController@contact');

@@ -97,7 +97,7 @@ $invoices = DB::select('select * from invoice where patient_ID ='.$IDpa);
                 @foreach ($invoices as $invoice)
                     
                 @php
-                    $bills=DB::select('select * from invoice where invoice_id ='.$invoice->id);
+                    $bills=DB::select('select * from invoice where id ='.$invoice->id);
                 @endphp
                 <div class="col-xs-6 col-md-8 col-lg-8 vcenter emp-details">
                     <span class="text-primary bg-primary">Invoice ID </span><br />

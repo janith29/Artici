@@ -15,6 +15,7 @@ class CreateReplyTable extends Migration
     {
         Schema::create('Reply', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('Did');
             $table->text('replay');
             $table->string('replay_pic')->nullable();
             $table->string('replier_ID');

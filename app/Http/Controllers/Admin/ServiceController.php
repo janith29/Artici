@@ -45,27 +45,39 @@ class ServiceController extends Controller
         $em=$request->service_type;
         $name="panding";
         $up="0";
+        $did=null;
         $file=$request ->file('service_image');
        // DB::insert('INSERT INTO `limb-care`.`service` ( `serviceName`, `description`, `type`, `dataenterID`, `dataupdaterID`) VALUES ( ?, ?, ?, ? ,?)',
       //  [ $request['service_name'], $request['service_des'], $request['service_type'],$request['empID'],$request['it_type'],$up]);
-        $Services->serviceName = $request->get('service_name');
-        $Services->description = $request->get('service_des');
-        $Services->type = $request->get('service_type');
-        $Services->pic = $name;
-        $Services->dataenterID=$request['empID'];
-        $Services->$up;
-        $Services->save();
+        
         $serviceL = DB::select('select * from service ORDER BY id DESC LIMIT 1');
         $type=$file->guessExtension();
         $lastid = 0;
         foreach($serviceL as $serviceLs)
         {
             $lastid=$serviceLs->id;
-
+            $did=$serviceLs->Did;
         }
+        if($lastid==0)
+         {
+             $did="SER000";
+         }
+         $lastDid=substr($did,3);
+         $lastDid=$lastDid+1;
+         $lastDid=str_pad($lastDid,4,"0",STR_PAD_LEFT);
+         $did="SER".$lastDid;
+         $lastid=$lastid+1;
+
         $name=$lastid."item.".$type;
         $file->move('image/service/item',$name);
+        $Services->serviceName = $request->get('service_name');
+        $Services->description = $request->get('service_des');
+        $Services->type = $request->get('service_type');
+        $Services->pic = $name;
+        $Services->dataenterID=$request['empID'];
+        $Services->$up;
         $Services->pic=$name;
+        $Services->Did = $did;
         $Services->save();
         return view('admin.services.success');
     }
@@ -141,7 +153,11 @@ class ServiceController extends Controller
     }
     public function search(Request $request)//Request $request, Employee $employee
     {
-        $services = DB::table('service')->where('id', $request['search'])->orWhere('serviceName', 'like', '%' . $request['search'] . '%')->get();
+        $services = DB::table('service')
+        ->where('id', $request['search'])
+        ->orWhere('serviceName', 'like', '%' . $request['search'] . '%')
+        ->orWhere('Did', 'like', '%' . $request['search'] . '%')
+        ->get();
         
         return view('admin.services.index', compact('services'));
         

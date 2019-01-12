@@ -15,6 +15,7 @@ class CreateInvoiceTable extends Migration
     {
         Schema::create('Invoice', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('Did');
             $table->integer('amount');
             $table->integer('remaining_amount');
             $table->string('patient_ID');

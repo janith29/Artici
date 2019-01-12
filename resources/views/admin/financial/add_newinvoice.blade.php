@@ -8,7 +8,7 @@
 
 <form action="addninvoice" method="post">
 {{ csrf_field() }}
-        <h3>other payment</h3>
+        <h3>Invoice</h3>
 @if (!$errors->isEmpty())
 <div class="alert alert-danger" role="alert">
 {!! $errors->first() !!}

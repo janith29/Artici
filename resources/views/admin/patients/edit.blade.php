@@ -29,11 +29,10 @@
                 <input type="text" name="email" class="form-control" id="inputAddress" value="{{ $patient->email }}">
             </div>
             <div class="form-group">
-                <label for="inputAddress">Address</label>
-                <textarea name="address" class="form-control" id="inputAddress" >
-                    {{ $patient->address }}
-                </textarea>
-            </div>
+                    <label for="address">Address *</label>
+                    <textarea class="form-control" name="address" id="address" cols="30" rows="10" placeholder="Patient Address"> {{ $patient->address }}</textarea>
+                  </div>
+            
             <div class="form-group">
                 <label for="inputAddress">Mobile Number</label>
                 <input type="text" name="mobile" class="form-control" id="inputAddress" value="{{ $patient->mobile }}">
@@ -45,6 +44,7 @@
 
             <button type="reset" class="btn btn-primary">Clear</button>
             <button type="submit" class="btn btn-primary">Edit</button>
+            <a href="{{ route('admin.patients') }}" class="btn btn-danger">Cancel</a>
         </form>
     </div>
 

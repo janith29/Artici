@@ -23,6 +23,7 @@ class EmployeeController extends Controller
         $key = $request->input('key');
         // $emp = Employee::latest()->search($key)->paginate(1);
         $employees = Employee::latest()->search($key)->paginate(20);
+        // return  $employees;
         return view('admin.employees.index', compact('employees', 'key'));
     }
 
@@ -87,14 +88,22 @@ class EmployeeController extends Controller
                 
         $name="panding";
         $type=$file->guessExtension();
-        
+        $did=null;
          foreach($employees as $employeess)
          {
              $lastid=$employeess->id;
-             
+             $did=$employeess->Did;
          }
-         
-         $lastid=$lastid;
+         if($lastid==0)
+         {
+             $did="EMP000";
+         }
+
+         $lastDid=substr($did,3);
+         $lastDid=$lastDid+1;
+         $lastDid=str_pad($lastDid,4,"0",STR_PAD_LEFT);
+         $did="EMP".$lastDid;
+         $lastid=$lastid+1;
          
          $name=$lastid."pic.".$type;
          $file->move('image/emp/profile',$name);
@@ -140,6 +149,7 @@ class EmployeeController extends Controller
         $employee->contactNo = $request->get('contactNo');
         $employee->birthday = $request->get('birthday');
         $employee->address = $request->get('address');
+        $employee->Did = $did;
         $employee->save();
 
         //get newly inserted employee id

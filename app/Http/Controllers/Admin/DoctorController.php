@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use App\Models\Patient;
 use Charts;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
@@ -38,26 +39,24 @@ class DoctorController extends Controller
      *
      * @return \Illuminate\Http\Response66
      */
-    public function create(Request $request)
+    public function create(Request $request,Doctor $doctor)
     {
-
         $lastid=0;
         $name="panding";
-
         //check for duplicate
         Validator::extend('uniqueDoctorCheck', function ($attribute, $value, $parameters, $validator) {
-            $count = DB::table('doctors')->where('email', $value)->count();
-        
+            $count = DB::table('users')->where('email', $value)->count();
+
             return $count === 0;
         });
-
+        
+        
         $validatedData = $request->validate([
 
             'name'     => 'required|regex:/^[\pL\s\-]+$/u',
             //'nic' => 'required|regex:/[0-9]{9}[V-v]/',
             //'address' => 'required',
-            'password' => 'required|min:8',
-            'comfirm-password' => 'required|same:password',
+            'doc_pic' => 'required',
             'hospital' => 'required|regex:/^[\pL\s\-]+$/u',
 
 
@@ -78,18 +77,25 @@ class DoctorController extends Controller
         foreach($doctor as $doc)
         {
             $lastid=$doc->id;
-
+            $did=$doc->Did;
         }
-        $lastid=$lastid;
-
+        if($lastid==0)
+         {
+            $did="DOC000";
+         }
+         $lastDid=substr($did,3);
+         $lastDid=$lastDid+1;
+         $lastDid=str_pad($lastDid,4,"0",STR_PAD_LEFT);
+         $did="DOC".$lastDid;
+         $lastid=$lastid+1;
         $name=$lastid."pic.".$type;
         $file->move('image/doc/profile',$name);
 
 
 
-        DB::insert('INSERT INTO `doctors` (`name`,`email`,`hospital`,`password`,`mobile`,`doc_pic`,`created_at`) VALUES  ( ?,?,?,?,?,?,?)' ,[$request['name'], $request['email'], $request['hospital'],$request['password'],$request['mobile'],$name,$time]);
+        DB::insert('INSERT INTO `doctors` (`name`,`email`,`hospital`,`Did`,`mobile`,`doc_pic`,`created_at`) VALUES  ( ?,?,?,?,?,?,?)' ,[$request['name'], $request['email'], $request['hospital'],$did,$request['mobile'],$name,$time]);
 
-        
+
         //attach the role to login in to correct dashboard
         $role = Role::findOrFail(6);
 
@@ -176,7 +182,7 @@ class DoctorController extends Controller
         $message = 'Successfully deleted doctor named :- '.$doctor->name.' with ID :-'.$doctor->id;
         
         //delete doctor record from users table
-        $user = DB::table('doctor')->where('email',$doctor->email)->delete();
+        $user = DB::table('doctors')->where('email',$doctor->email)->delete();
 
         $doctor->delete();
 
@@ -184,26 +190,16 @@ class DoctorController extends Controller
     }
 
     public function report(){
-        $viewer = doctor::select(DB::raw("count(month(created_at)) as count"))
-        ->orderBy("created_at")
-        ->groupBy(DB::raw("month(created_at)"))
-        ->get()->toArray();
-        $viewer = array_column($viewer, 'count');
+        $counts = [
+            'Doctors' => DB::table('doctors')->count(),
+            'hospital' => DB::table('doctors')
+                ->select('*')
+                ->DISTINCT('hospital')
+                ->count( 'hospital')
 
-        $click = doctor::select(DB::raw("count(*) as count"))
-            ->orderBy("created_at")
-            ->groupBy(DB::raw("month(created_at)"))
-            ->get()->toArray();
-        $click = array_column($click, 'count');
+        ];
 
-
-        return view('admin.doctors.report')
-            ->with('viewer',json_encode($viewer,JSON_NUMERIC_CHECK))
-            ->with('click',json_encode($click,JSON_NUMERIC_CHECK));
-
-
-
-
+        return view('admin.doctors.report',['counts' => $counts]);
 
     }
     public function displayReport(Request $request)
@@ -250,10 +246,8 @@ class DoctorController extends Controller
 
         $searchname =  $request->get('q');
         $Doctors = Doctor::where('name','LIKE','%'.$searchname.'%')->orWhere('id','LIKE','%'.$searchname.'%')->get();
-        $message = 'Successfully updated doctor named ';
-        if(count($Doctors) > 0)
-            return view('admin.Doctors.index')->withDoctors($Doctors)->withQuery ( $searchname )->with('message',$message);
-        else return view ('admin.Doctors.index')->withMessage('No Details found. Try to search again !');
+       
+            return view('admin.Doctors.index')->withDoctors($Doctors)->withQuery ( $searchname );
     }
 
 }

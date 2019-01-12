@@ -5,8 +5,11 @@
         @section('title', "Financial Management")
         </div>
         <div class="col-12 col-md-12">
+            <a href="{{ route('admin.financial.IncomeReport') }}" class="btn btn-success">Income Report</a>
+            <a href="{{ route('admin.financial.OutcomeReport') }}" class="btn btn-primary">Outcome Report</a>
         <div class="row tile_count">
                 <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+
                     <span class="count_top"><font size="+2"><i class="fa fa-money"> </i> Total Profit</font></span>
                     <div>
                         <span class="count green">RS.</span>

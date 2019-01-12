@@ -68,48 +68,58 @@ class PatientController extends Controller
             return $count === 0;
         });
 
-        $validatedData = $request->validate([
-            // 'id' => 'required',
-            // 'nic' => 'required',
-            //'name' => 'required|string',
-            'name'     => 'required|regex:/^[\pL\s\-]+$/u',
-            'nic' => 'required|regex:/[0-9]{9}[V-v]/',
+        $validatedData = [
+
+            'name' => 'required|regex:/^[a-zA-Z .]+$/u|max:255',
+            'nic' => 'required|digits:9',
             'address' => 'required',
-            'gender'=> 'in:Male,Female',
-
-            'password' => 'required|min:8',
-            'confirm-password' => 'required|same:password',
-
-
-            'email' => 'required|email',
-
-            //'mobile' => 'required|min:11|numeric',
+            'gender'=> 'required',
+            'pat_pic' => 'required',
             'mobile' => 'required|regex:/(0)[0-9]{9}/',
             'email' => "uniquePatientCheck:{$request->email}"
 
-            // 'birthday' => 'required'
-        ]);
+        ];
+        $customMessages = [
+            'name.regex' => 'Name cannot contain numbers and special characters',
+            'nic.digits' => 'NIC must contains only 9 numbers',
+            'email' => 'Patient already in the system'
+        ];
+        $this->validate($request, $validatedData, $customMessages);
+
+
         $file=$request ->file('pat_pic');
 
         $patients=DB::select('select * from patient ORDER BY id DESC LIMIT 1');
 
         $name="panding";
         $type=$file->guessExtension();
-
+        $did=null;
         foreach($patients as $patientss)
         {
             $lastid=$patientss->id;
-
+            $did=$patientss->Did;
         }
+       
+        if($lastid==0)
+        {
+            $did="PAT000";
+        }
+
+        $lastDid=substr($did,3);
+        $lastDid=$lastDid+1;
+        $lastDid=str_pad($lastDid,4,"0",STR_PAD_LEFT);
+        $did="PAT".$lastDid;
+        $lastid=$lastid+1;
+         
 
         $lastid=$lastid;
 
         $name=$lastid."pic.".$type;
         $file->move('image/pat/profile',$name);
 
-            $time =Carbon::now()->format('Y-m-d H:i:s');
+        $time =Carbon::now()->format('Y-m-d H:i:s');
 
-        DB::insert('INSERT INTO `patient` ( `name`,`email`,`gender`,`nic`, `password`, `mobile`, `address`,`pat_pic`, `created_at`) VALUES ( ?,?,?, ?, ?, ? ,?,?,?)',[  $request['name'],$request['email'],$request['gender'], $request['nic'], $request['password'], $request['mobile'],$request['address'],$name,$time]);
+        DB::insert('INSERT INTO `patient` ( `name`,`email`,`gender`,`nic`, `Did`, `mobile`, `address`,`pat_pic`, `created_at`) VALUES ( ?,?,?, ?, ?, ? ,?,?,?)',[  $request['name'],$request['email'],$request['gender'], $request['nic'],$did , $request['mobile'],$request['address'],$name,$time]);
         
         
         //attach the role to login in to correct dashboard
@@ -117,12 +127,12 @@ class PatientController extends Controller
 
         //insert newly added patient into user table to login and and other things
         $user = User::create([
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-            'password' => bcrypt($request->get('password')),
-            'confirmation_code' => Uuid::uuid4(),
-            'confirmed' => true,
-            'usertype' => 'Patient'
+        'name' => $request->get('name'),
+        'email' => $request->get('email'),
+        'password' => bcrypt($request->get('password')),
+        'confirmation_code' => Uuid::uuid4(),
+        'confirmed' => true,
+        'usertype' => 'Patient'
         ]);
 
         // assign the role to a user role.
@@ -223,7 +233,7 @@ class PatientController extends Controller
 
         $meta = [ // For displaying filters description on header
             'Registered on' => $fromDate . ' To ' . $toDate,
-            'Sort By' => $sortBy
+
         ];
 
         $queryBuilder = patient::select(['id','created_at','name', 'email','Gender', 'nic','mobile','address']) // Do some querying..
@@ -233,16 +243,21 @@ class PatientController extends Controller
 
             'Name' => 'name',
             'Registered At' =>'created_at', // if no column_name specified, this will automatically seach for snake_case of column name (will be registered_at) column from query result
-            'Email' => 'email',
+
+            'NIC' => 'nic',
             'Gender' =>'Gender',
-            'NIC' => 'nic'
+            'Mobile Num.' =>'mobile',
+            'Address' =>'address',
+
+
+
 
         ];
 
         // Generate Report with flexibility to manipulate column class even manipulate column value (using Carbon, etc).
         return PdfReport::of($title, $meta, $queryBuilder, $columns)
 
-            ->editColumns(['Registered At','Name','Email','Gender','NIC'], [ // Mass edit column
+            ->editColumns([''], [ // Mass edit column
                 'class' => 'right '
             ])
 
@@ -251,8 +266,11 @@ class PatientController extends Controller
     }
     public function search(Request $request){
 
-            $searchname =  $request->get('q');
-            $patients = patient::where('name','LIKE','%'.$searchname.'%')->orWhere('id','LIKE','%'.$searchname.'%')->get();
+            $searchname =  $request->get('search');
+            $patients = patient::where('name','LIKE','%'.$searchname.'%')
+            ->orWhere('id','LIKE','%'.$searchname.'%') 
+            ->orWhere('Did','LIKE','%'.$searchname.'%')
+            ->get();
             if(count($patients) > 0)
                 return view('admin.patients.index')->withPatients($patients)->withQuery ( $searchname );
             else return view ('admin.patients.index')->withMessage('No Details found. Try to search again !');

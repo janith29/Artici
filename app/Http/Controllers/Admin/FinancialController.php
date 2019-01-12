@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use DateTime;
+use PdfReport;
 use App\Models\Employee;
 use App\Http\Requests\Bill;
 use App\Http\Requests\BillIpdate;
@@ -43,7 +44,6 @@ class FinancialController extends Controller
         {
             $incomevalu= $incomevalu+$income->amount;
         }
-
         $profit= $incomevalu-$outcomevalu;
         return view('admin.financial.index', ['outcomes' => $outcomevalu, 'incomes' => $incomevalu,'profit' => $profit]);
     }
@@ -101,11 +101,27 @@ class FinancialController extends Controller
 
     
     public function newTinvoice(Invoiceval $request,Invoice $Invoices)
-    {
+    {$did=null;
+        $invoices=DB::select('select * from invoice ORDER BY id DESC LIMIT 1');
+        $lastid=0;
+        foreach($invoices as $invoice)
+         {
+             $lastid=$invoice->id;
+             $did=$invoice->Did;
+         }
+         if($lastid==0)
+         {
+             $did="INV000";
+         }
+         $lastDid=substr($did,3);
+         $lastDid=$lastDid+1;
+         $lastDid=str_pad($lastDid,4,"0",STR_PAD_LEFT);
+         $did="INV".$lastDid;
         
         $Invoices->amount = $request->get('amount');
         $Invoices->remaining_amount = $request->get('amount');
         $Invoices->patient_ID = $request->get('id');
+        $Invoices->Did = $did;
         $Invoices->save();
         return view('admin.financial.success_invoice');
      }
@@ -138,34 +154,73 @@ class FinancialController extends Controller
     public function stor(Bill $request,FinancialBillPayment $billw,Income $in)
     { 
         $bills= DB::table('invoice')->where('id', $request['inID'])->value('remaining_amount');
-        $addam=$request['bi_am'];
+         $addam=$request['bi_am'];
         if($addam>$bills)
         {
             $message = 'Pyament  maximum ';
             return redirect()->intended(route('admin.financial.addbillinvoice', [$request['inID']]))->with('message', $message);
        
         }
+        $lastid=0;
+        $did=null;
+        $billss=DB::select('select * from bill ORDER BY id DESC LIMIT 1');
         $bills=$bills-$addam;
+        foreach($billss as $bills)
+         {
+             $lastid=$bills->id;
+             $did=$bills->Did;
+         }
+         if($lastid==0)
+         {
+             $did="BIL000";
+         }
+         $lastDid=substr($did,3);
+         $lastDid=$lastDid+1;
+         $lastDid=str_pad($lastDid,4,"0",STR_PAD_LEFT);
+         $did="BIL".$lastDid;
+        
+
         DB::table('invoice')
         ->where('id', $request['inID'])
         ->update(['remaining_amount' =>$bills]);
-        $in->amount=$request['emp_am'];
-        $in->save();
 
+        $in->amount=$request['bi_am'];
+        $in->save();
+        
         $billw->invoice_id=$request['inID'];
         $billw->empid=$request['empid'];
         $billw->amount=$request['bi_am'];
+        $billw->Did = $did;
         $billw->save();
         return view('admin.financial.success_bill');
     }
     public function salary(Salary $request,Outcome $in,FinancialSalaryPayment $sala)
     { 
+        // $lastid=0;
+        // $did=null;
+        // $billss=DB::select('select * from bill ORDER BY id DESC LIMIT 1');
+       
+        // foreach($invoices as $invoice)
+        //  {
+        //      $lastid=$invoice->id;
+        //      $did=$invoice->Did;
+        //  }
+        //  if($lastid==0)
+        //  {
+        //      $did="PAY000";
+        //  }
+        //  $lastDid=substr($did,3);
+        //  $lastDid=$lastDid+1;
+        //  $lastDid=str_pad($lastDid,4,"0",STR_PAD_LEFT);
+        //  $did="PAY".$lastDid;
+        
         $in->amount=$request['emp_am'];
         $in->save();
          $request['date'];
         $sala->emp_id=$request['empid'];
         $sala->date=$request['date'];
         $sala->amount=$request['emp_am'];
+        // $sala->Did = $did;
         $sala->save();
         // DB::insert('INSERT INTO `outcome` ( `amount`) VALUES  ( ?)',[ $request['emp_am']]);
         // DB::insert('INSERT INTO `salarypay` (`emp_name`, `date`, `amount`) VALUES  ( ?, ?, ?)',[$request['emp_name'], $now, $request['emp_am']]);
@@ -185,7 +240,6 @@ class FinancialController extends Controller
         {
             $isn->amount=$request['oth_am'];
             $isn->save();
-           // DB::insert('INSERT INTO `income` ( `amount`) VALUES  ( ?)',[ $request['oth_am']]);
             DB::insert('INSERT INTO `otherpay` ( `descrption`,`type`, `amount`) VALUES   ( ?,?,?)',[$request['oth_note'],$request['oth_type'], $request['oth_am']]);
             return view('admin.financial.success_other');
         }
@@ -208,9 +262,9 @@ class FinancialController extends Controller
         $invoiceid=$financialBill->invoice_id;
         $Invoices = Invoice::all();
         $patients=patient::all();
-         $PId= DB::table('invoice')->where('id', $invoiceid)->value('patient_ID');
-          $Pname= DB::table('patient')->where('id', $PId)->value('name');
-          $array = array('name' => $Pname);
+        $PId= DB::table('invoice')->where('id', $invoiceid)->value('patient_ID');
+        $Pname= DB::table('patient')->where('id', $PId)->value('name');
+        $array = array('name' => $Pname);
        
         return view('admin.financial.showBill', ['financialBill' => $financialBill],compact('patients'),compact('Invoices'))->with('array', $array);;
     }
@@ -390,4 +444,98 @@ class FinancialController extends Controller
     
         return view('admin.financial.index_bill',compact('bills'));
     }
+    public function incomereport()
+    {
+
+        return view('admin.financial.IncomeReport');
+    }
+    public function displayIncomeReport(Request $request)
+    {
+        $fromDate = $request->input('from_date');
+        $toDate = $request->input('to_date');
+        //$sortBy = $request->input('sort_by');
+
+        $title = 'Income Report'; // Report title
+
+        $meta = [ // For displaying filters description on header
+            'Registered on' => $fromDate . ' To ' . $toDate,
+
+        ];
+
+        $queryBuilder = income::select(['id','amount','created_at']) // Do some querying..
+        ->whereBetween('created_at', [$fromDate, $toDate]);
+
+        $columns = [ // Set Column to be displayed
+
+
+            'Registered At' =>'created_at',
+            'Total Balance' => 'amount',
+
+
+        ];
+
+        // Generate Report with flexibility to manipulate column class even manipulate column value (using Carbon, etc).
+        return PdfReport::of($title, $meta, $queryBuilder, $columns)
+
+            ->editColumns(['Registered At','Total Balance'], [ // Mass edit column
+                'class' => 'right '
+            ])
+            ->showTotal([ // Used to sum all value on specified column on the last table (except using groupBy method). 'point' is a type for displaying total with a thousand separator
+                'Total Balance' => 'point' // if you want to show dollar sign ($) then use 'Total Balance' => '$'
+            ])
+
+
+            ->limit(20) // Limit record to be showed
+            ->stream(); // other available method: download('filename') to download pdf / make() that will producing DomPDF / SnappyPdf instance so you could do any other DomPDF / snappyPdf method such as stream() or download()
+    }
+    public function Outcomereport()
+    {
+
+        return view('admin.financial.OutcomeReport');
+    }
+
+    public function displayOutcomeReport(Request $request)
+    {
+        $fromDate = $request->input('from_date');
+        $toDate = $request->input('to_date');
+        //$sortBy = $request->input('sort_by');
+
+        $title = 'Outcome Report'; // Report title
+
+        $meta = [ // For displaying filters description on header
+            'Registered on' => $fromDate . ' To ' . $toDate,
+
+        ];
+
+        $queryBuilder = outcome::select(['id','amount','created_at']) // Do some querying..
+        ->whereBetween('created_at', [$fromDate, $toDate]);
+
+        $columns = [ // Set Column to be displayed
+
+
+            'Registered At' =>'created_at',
+            'Total Balance' => 'amount',
+
+
+        ];
+
+        // Generate Report with flexibility to manipulate column class even manipulate column value (using Carbon, etc).
+        return PdfReport::of($title, $meta, $queryBuilder, $columns)
+
+            ->editColumns(['Registered At','Total Balance'], [ // Mass edit column
+                'class' => 'right '
+            ])
+            ->showTotal([ // Used to sum all value on specified column on the last table (except using groupBy method). 'point' is a type for displaying total with a thousand separator
+                'Total Balance' => 'point' // if you want to show dollar sign ($) then use 'Total Balance' => '$'
+            ])
+
+
+            ->limit(20) // Limit record to be showed
+            ->stream(); // other available method: download('filename') to download pdf / make() that will producing DomPDF / SnappyPdf instance so you could do any other DomPDF / snappyPdf method such as stream() or download()
+    }
+
+
+
+
+
 }
