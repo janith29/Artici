@@ -51,30 +51,40 @@
                     <h2 class="breadcumb-title">Contact</h2>
                 </div>
             </div>
-            <div class="map-area mb-100">
-                    <div class="container">
-                            <div class="well">
-                                <div id="googleMap"align="center"  class="googleMap"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126727.089288154!2d79.8617497071549!3d6.983162333845486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae257486ae32765%3A0x5f571d56e0a767bc!2sArtificial+limb+care+(Pvt)+Ltd.!5e0!3m2!1sen!2slk!4v1531708933391" width="800" height="450" frameborder="0" style="border:0" allowfullscreen></iframe></div>
-                           
-                    </div></div>
-                </div>
-                .
-<div class="container">
-    <div class="panel panel-info">
-        <div class="panel-heading col-xs-4">
-          <h4>Friday close...</h4>
-          <h4>Other days 9am - 5am</h4>
+            
+        <div class="container">
+            <div  align="center"  class=" col-xs-12 col-sm-12  col-lg-12" style="width:100%;height:400px;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126727.089288154!2d79.8617497071549!3d6.983162333845486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae257486ae32765%3A0x5f571d56e0a767bc!2sArtificial+limb+care+(Pvt)+Ltd.!5e0!3m2!1sen!2slk!4v1531708933391"   style="height:350px;width:350px" frameborder="1" style="border:1" allowfullscreen></iframe>
+            </div>
         </div>
-        <div class="panel-heading col-xs-4">
-            <h4>Email:-info@artificiallimbcare.lk</h4><h4> Call Us:-<a href="tel:0713450257">071 345 0257</a> </h4>
-          </div>
-        <div class="panel-heading col-xs-4">
-            <h4>No 4, Mithrananda Mawatha,</h4> 
-            <h4>Kiribathgoda.<br></h4>
-          </div>
-          
-      </div>
-      </div>.
+                
+                <div class="container">
+                        <div class="col-xs-12 col-sm-12  col-lg-4">
+                            <div class="panel panel-info ">
+                                <div class="panel-heading " >
+                                    <h4>Friday close...</h4>
+                              <h4>Other days 9am - 5am</h4>
+                                </div>
+                          </div>
+                         </div> 
+                         <div class="col-xs-12 col-sm-12  col-lg-4">
+                            <div class="panel panel-info ">
+                                <div class="panel-heading " >
+                                    <h4>Email:-info@artificiallimbcare.lk</h4>
+                                    <h4> Call Us:-<a href="tel:0713450257">071 345 0257</a> </h4>
+                              
+                                </div>
+                          </div>
+                         </div> 
+                         <div class="col-xs-12 col-sm-12 col-lg-4">
+                            <div class="panel panel-info ">
+                                <div class="panel-heading " >
+                                    <h4>No 4, Mithrananda Mawatha,</h4> 
+                                    <h4>Kiribathgoda.<br></h4>
+                                </div>
+                          </div>
+                         </div> 
+                        </div>.
       <div class="container">
             <div class="panel panel-danger">
 

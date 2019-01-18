@@ -12,6 +12,8 @@ use App\Models\Auth\Role\Role;
 use App\Models\Auth\User\User;
 use Ramsey\Uuid\Uuid;
 use Validator;
+use App;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class PatientController extends Controller
 {
@@ -129,7 +131,7 @@ class PatientController extends Controller
         $user = User::create([
         'name' => $request->get('name'),
         'email' => $request->get('email'),
-        'password' => bcrypt($request->get('password')),
+        'password' => bcrypt($request->get('nic')),
         'confirmation_code' => Uuid::uuid4(),
         'confirmed' => true,
         'usertype' => 'Patient'
@@ -225,6 +227,7 @@ class PatientController extends Controller
 
     public function displayReport(Request $request)
     {
+       
         $fromDate = $request->input('from_date');
         $toDate = $request->input('to_date');
         $sortBy = $request->input('sort_by');

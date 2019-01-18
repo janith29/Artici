@@ -46,9 +46,10 @@
 @endsection
 @section('content')
 
-        <div class="col-xs-12" >
+        
 <div class="container">
-    
+  <div class="row">
+      <div class="col-xs-12" >
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">
@@ -82,26 +83,39 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
-  </div>
+  </div></div>
         </div>
 <br>
 .
 <div class="container">
-    <div class="panel panel-info">
-        <div class="panel-heading col-xs-4">
-          <h4>Friday close...</h4>
+    <div class="col-xs-12 col-sm-12  col-lg-4">
+        <div class="panel panel-info ">
+            <div class="panel-heading " >
+                <h4>Friday close...</h4>
           <h4>Other days 9am - 5am</h4>
-        </div>
-        <div class="panel-heading col-xs-4">
-            <h4>Email:-info@artificiallimbcare.lk</h4><h4> Call Us:-<a href="tel:0713450257">071 345 0257</a> </h4>
-          </div>
-        <div class="panel-heading col-xs-4">
-            <h4>No 4, Mithrananda Mawatha,</h4> 
-            <h4>Kiribathgoda.<br></h4>
-          </div>
+            </div>
+      </div>
+     </div> 
+     <div class="col-xs-12 col-sm-12  col-lg-4">
+        <div class="panel panel-info ">
+            <div class="panel-heading " >
+                <h4>Email:-info@artificiallimbcare.lk</h4>
+                <h4> Call Us:-<a href="tel:0713450257">071 345 0257</a> </h4>
           
+            </div>
       </div>
+     </div> 
+     <div class="col-xs-12 col-sm-12 col-lg-4">
+        <div class="panel panel-info ">
+            <div class="panel-heading " >
+                <h4>No 4, Mithrananda Mawatha,</h4> 
+                <h4>Kiribathgoda.<br></h4>
+            </div>
       </div>
+     </div> 
+    </div>
+   <br>
+
       <div class="container">
           <br>
           <div class="well well-lg"><p style="text-align:center;">
@@ -109,32 +123,43 @@
             <h2 align="center">Our Services</h2>
                  
             </div>
-            <div class="col-xs-3 text-center">
+            <div class="col-xs-6 col-sm-6 col-lg-3">
               <div class="panel panel-success ">
-                  <div class="panel-heading ">
-                     <img src="img/icons/orthosis.png" width="75px" height="75px">
-                    <h4>Orthosis care</h4></div>
-              </div>
-            </div> 
-            <div class="col-xs-3 text-center">
-                <div class="panel panel-success ">
-                    <div class="panel-heading "> <img src="img/icons/pedestrian-walking.png"  width="75px" height="75px">
-                      <h4>Prosthesis care</h4></div>
-                </div>
-              </div> 
-              <div class="col-xs-3 text-center">
-                  <div class="panel panel-success ">
-                      <div class="panel-heading "> <img src="img/icons/chaild.png"  width="75px" height="75px">
-                        <h4>Children care</h4></div>
+                  <div class="panel-heading " >
+                      <p style="text-align:center;"><i class="fa fa-wheelchair fa-3x"  aria-hidden="true"> </i></p>
+                       <h5 align="center">Orthosis care</h5>
                   </div>
-                </div> 
-                <div class="col-xs-3 text-center">
-                    <div class="panel panel-success ">
-                        <div class="panel-heading "> <img src="img/icons/nose.png"  width="75px" height="75px">
-                          <h4>Cosmetic  care</h4></div>
-                    </div>
-                  </div> 
+            </div>
+           </div> 
+           <div class="col-xs-6 col-sm-6 col-lg-3">
+              
+              <div class="panel panel-success ">
+                  <div class="panel-heading " > 
+                      <p style="text-align:center;"> <i class="fa fa-child fa-3x"  aria-hidden="true"> </i></p>
+                   <h5 align="center">Children care</h5></div>
+              </div>
+            
+          </div> 
+           <div class="col-xs-6 col-sm-6 col-lg-3">
+                <div class="panel panel-success ">
+                    <div class="panel-heading " > 
+                        <p style="text-align:center;"><i class="fa fa-blind fa-3x"  aria-hidden="true"> </i></p>
+                        <h5 align="center">Prosthesis care</h5>
+                      </div>
                 </div>
+            </div> 
+            <div class="col-xs-6 col-sm-6 col-lg-3">
+              
+                  <div class="panel panel-success ">
+                      <div class="panel-heading " > 
+                          <p style="text-align:center;"><i class="fa fa-hand-paper-o  fa-3x"  aria-hidden="true"> </i></p>
+                          <h5 align="center">Cosmetic  care</h5></div>
+                  </div>
+                
+              </div> 
+             
+                
+              </div>
                 
                 <div class="container">
                     <div class="panel panel-danger">

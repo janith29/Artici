@@ -56,6 +56,8 @@ Route::group(['namespace' => 'Auth'], function () {
  * Backend routes
  */
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => 'administrator'], function () {
+    Route::post('financial/bill/printbill', 'FinancialController@printbill');
+    Route::post('financial/index_invoice/printinvoice', 'FinancialController@printinvoice');
     Route::get('financial/InReport','FinancialController@incomereport')->name('financial.IncomeReport');
 
     Route::post('financial/Incomereport', 'FinancialController@displayIncomeReport');

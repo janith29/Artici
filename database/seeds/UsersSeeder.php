@@ -34,6 +34,18 @@ class UsersSeeder extends Seeder
                 'usertype' => 'administrator'
              ]
             ,
+             [
+                'name' => 'Admin2',
+                'email' => 'sdd@labs64.com',
+                'password' => bcrypt('894564123'),
+                'active' => true,
+                'confirmation_code' => \Ramsey\Uuid\Uuid::uuid4(),
+                'confirmed' => true,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'usertype' => 'administrator'
+             ]
+            ,
             
             [
                 'name' => 'Demo',
@@ -54,7 +66,7 @@ class UsersSeeder extends Seeder
         DB::table('employees')->insert([
             'Did' => 'EMP0001',
             'name' => 'Buddika asanka',
-            'nic' => '882371050',
+            'nic' => '894564123',
             'employeeType' => 'administrator ',
             'emp_pic' => '1pic.jpeg ',
             'birthday' => '1988.08.24 ',

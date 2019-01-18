@@ -53,25 +53,33 @@
                                 <h2 >About Us</h2>
                             </div>
                         
-                
-                <div class="panel panel-info">
-                <div class="panel-heading col-xs-4">
-                        <h1 align="center">Our vision</h1>
-                        <h3 align="center">Our vision is to undertake new technology, development of skills, seeking of new principles, innovation and understanding of the patient’s needs in Prosthetics & Orthotics that can serve the human kind with passion. <br><br><br></h3>
-                </div>
-           
-                <div class="panel-heading col-xs-4"style="background-color:blue">
-                        <h1 align="center">Mission</h1>
-                        <h3 align="center">To provide the highest quality prosthetics & Orthotics care and rehabilitation services to ensure that each patient achieves the maximum functional recovery from disability. <br><br><br><br><br></h3>
-                     </div>
-                
-                <div class="panel-heading col-xs-4">
-                        <h1 align="center">Service </h1>
-                        <h3 align="center">ALC aims to provide clients with a private, confidential and safe environment, where they have the opportunity to choice new technology to change the life and in their environment to enable them to maintain moderation and progress in their recovery.<br><br></h3>
-                    
-                  </div>
-                  
-              </div>
+                            <div class="col-xs-12 col-sm-12  col-lg-4">
+                                    <div class="panel panel-info ">
+                                        <div class="panel-heading " >
+                                                <h1 align="center">Our vision</h1>
+                                                <h3 align="center">Our vision is to undertake new technology, development of skills, seeking of new principles, innovation and understanding of the patient’s needs in Prosthetics & Orthotics that can serve the human kind with passion. <br><br><br></h3>
+                                       
+                                        </div>
+                                  </div>
+                                 </div> 
+                                 <div class="col-xs-12 col-sm-12  col-lg-4">
+                                        <div class="panel panel-info ">
+                                            <div class="panel-heading " >
+                                                    <h1 align="center">Mission</h1>
+                                                    <h3 align="center">To provide the highest quality prosthetics & Orthotics care and rehabilitation services to ensure that each patient achieves the maximum functional recovery from disability. <br><br><br><br></h3>
+                                                
+                                            </div>
+                                      </div>
+                                     </div> 
+                                     <div class="col-xs-12 col-sm-12  col-lg-4">
+                                            <div class="panel panel-info ">
+                                                <div class="panel-heading " >
+                                                        <h1 align="center">Service </h1>
+                                                        <h3 align="center">ALC aims to provide clients with a private, confidential and safe environment, where they have the opportunity to choice new technology to change the life and in their environment to enable them to maintain moderation and progress in their recovery.<br><br></h3>
+                                                    
+                                                </div>
+                                          </div>
+                                         </div> 
               </div>
               <div class="container">
                    <br>
@@ -113,7 +121,7 @@
                         
                        
                         <img src="img/bg-img/signature.png" alt=""></div>
-                        <div class="col-xs-5">
+                        <div class="col-xs-6 col-sm-4 col-lg-2">
                                 <div class="medica-about-thumbnail">
                                     <img src="img/bg-img/about1.png" alt="">
                                 </div>
