@@ -12,6 +12,16 @@
         
                 </tr>
                 @php
+                
+                use Illuminate\Support\Facades\DB;
+                
+                $services=DB::select("select * from service WHERE id = ".$Invoice->service.";");
+                foreach ($services as $service)
+                {
+                    $Invoice->service=$service->serviceName;
+                }
+                @endphp
+                @php
                 $name='no';
                 $patintID='no';
                 foreach ($patients as $patient)

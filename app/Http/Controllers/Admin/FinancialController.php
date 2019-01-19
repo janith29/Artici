@@ -155,6 +155,7 @@ class FinancialController extends Controller
      */
     public function stor(Bill $request,FinancialBillPayment $billw,Income $in)
     { 
+        
         $bills= DB::table('invoice')->where('id', $request['inID'])->value('remaining_amount');
          $addam=$request['bi_am'];
         if($addam>$bills)
@@ -167,25 +168,26 @@ class FinancialController extends Controller
         $did=null;
         $billss=DB::select('select * from bill ORDER BY id DESC LIMIT 1');
         $bills=$bills-$addam;
-        foreach($billss as $bills)
+        foreach($billss as $billes)
          {
-             $lastid=$bills->id;
-             $did=$bills->Did;
+             $lastid=$billes->id;
+             $did=$billes->Did;
          }
          if($lastid==0)
          {
              $did="BIL000";
          }
+         
          $lastDid=substr($did,3);
          $lastDid=$lastDid+1;
          $lastDid=str_pad($lastDid,4,"0",STR_PAD_LEFT);
          $did="BIL".$lastDid;
         
-
+        
         DB::table('invoice')
         ->where('id', $request['inID'])
         ->update(['remaining_amount' =>$bills]);
-
+        
         $in->amount=$request['bi_am'];
         $in->save();
         
@@ -194,6 +196,7 @@ class FinancialController extends Controller
         $billw->amount=$request['bi_am'];
         $billw->Did = $did;
         $billw->save();
+        
         return view('admin.financial.success_bill');
     }
     public function salary(Salary $request,Outcome $in,FinancialSalaryPayment $sala)
@@ -548,6 +551,11 @@ class FinancialController extends Controller
         $patientname="no";
         $paddress="no";
         $paemail="no";
+        $services=DB::select("select * from service WHERE id = ".$service.";");
+        foreach ($services as $servicet)
+        {
+            $service=$servicet->serviceName;
+        }
         $detils = DB::select('select * from patient where id ='.$patintid);
         foreach($detils as $detil)
           {
@@ -883,6 +891,11 @@ class FinancialController extends Controller
             $paddress=$detil->address;
             $paemail=$detil->email;
           } 
+          $services=DB::select("select * from service WHERE id = ".$service.";");
+          foreach ($services as $servicee)
+          {
+              $service=$servicee->serviceName;
+          }
           $pdf=App::make('dompdf.wrapper');
           $pdf->loadHTML('<!DOCTYPE html>
           <html>
@@ -985,7 +998,7 @@ class FinancialController extends Controller
               margin: 0;
               font-weight: 400;
               color: #3989c6;
-              font-size: 1.2em
+              font-size: 2.2em
           }
           
           .invoice table .qty,.invoice table .total,.invoice table .unit {
