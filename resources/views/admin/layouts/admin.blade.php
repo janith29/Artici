@@ -25,7 +25,9 @@
                         </div>
                     @endif
                 </div>
+                <div class="container-fluid"> 
                 @yield('content')
+                </div>
             </div>
             <footer>
                 @include('admin.sections.footer')
