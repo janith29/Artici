@@ -103,7 +103,7 @@ class DoctorController extends Controller
         $user = User::create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
-            'password' => bcrypt($request->get('password')),
+            'password' => bcrypt($request->get('mobile')),
             'confirmation_code' => Uuid::uuid4(),
             'confirmed' => true,
             'usertype' => 'Doctor'

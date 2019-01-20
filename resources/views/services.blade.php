@@ -88,7 +88,7 @@
                               <div class="panel-heading " style="text-align: justify;">
                                   
                                     <p style="text-align:center;">  
-                                        <img class="imgdis" id={{ $service->id }} onclick="displayIMG(this.id)"  src="\image\service\item\{{ $service->pic }}" alt="Snow" style="height:200px;width:150px;max-width:200px"></p>
+                                        <img class="imgdis" id={{ $service->id }} onclick="displayIMG(this.id)"  src="\image\service\item\{{ $service->pic }}" alt="Snow" style="height:auto;width:auto;max-width:200px;max-height:200px;"></p>
                                                        
                                 <h4 align="center">{{ $service->serviceName }}</h4></div>
                                 <p >{{ $service->description }}</p>

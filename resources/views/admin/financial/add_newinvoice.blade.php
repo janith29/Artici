@@ -27,8 +27,8 @@ use App\Models\Service;
 $services = Service::all();
 @endphp
 <div class="form-group">
-    <label for="pa_service">Service type *</label>
-    <select name="pa_service" class="form-control" >
+    <label for="Service">Service type *</label>
+    <select name="Service" class="form-control" >
         <option  disabled>Select one</option>
         <option  disabled>*****Orthosis*****</option>
         @foreach($services as $service)
