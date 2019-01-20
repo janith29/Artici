@@ -436,6 +436,9 @@ Route::group(['prefix' => 'pno', 'as' => 'pno.', 'namespace' => 'employee\pno', 
 });
 Route::group(['prefix' => 'patient', 'as' => 'patient.', 'namespace' => 'patient', 'middleware' => 'patient'], function () {
     // Dashboard
+    
+    Route::get('financial/index_invoice/{Invoice}', 'PatientController@financialinvoice')->name('financial.showinvoice');
+ 
     Route::get('diagnosis', 'PatientController@patientint')->name('diagnosis.index');
     Route::get('diagnosis/{diagnosis}', 'DiagnosisController@show')->name('diagnosis.show');
     Route::get('/', 'PatientDashboardController@index')->name('dashboard');
@@ -472,7 +475,9 @@ Route::group(['prefix' => 'patient', 'as' => 'patient.', 'namespace' => 'patient
     //doctor
     Route::get('doctors', 'PatientController@doctors')->name('doctors');
     
-    //Diagnosis
+    //financial
+    Route::get('financial', 'PatientController@financial')->name('financial');
+    Route::get('financial/{financialBill}', 'PatientController@financialbill')->name('financial.showBill');
   
 });
 Route::group(['prefix' => 'doctor', 'as' => 'doctor.', 'namespace' => 'doctor', 'middleware' => 'doctor'], function () {

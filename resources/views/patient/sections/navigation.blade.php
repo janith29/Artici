@@ -93,6 +93,13 @@
                             {{ "Question Forum" }}
                         </a>
                     </li>
+                    <li class="@if (Request::is('patient/financial')) active @endif">
+                        <a href="{{ route('patient.financial') }}">
+                            <i class="fa fa-money" aria-hidden="true"></i>
+                            {{ "Financial" }}
+                        </a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
