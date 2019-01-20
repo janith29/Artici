@@ -13,7 +13,7 @@ class CreateDianosisPhoto extends Migration
      */
     public function up()
     {
-        Schema::create('DiagnosisPhoto', function (Blueprint $table) {
+        Schema::create('diagnosisphoto', function (Blueprint $table) {
             $table->increments('id');
             $table->string('diagnosis_pic');
             $table->string('diagnosis_ID');

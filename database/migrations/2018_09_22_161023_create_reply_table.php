@@ -13,7 +13,7 @@ class CreateReplyTable extends Migration
      */
     public function up()
     {
-        Schema::create('Reply', function (Blueprint $table) {
+        Schema::create('reply', function (Blueprint $table) {
             $table->increments('id');
             $table->string('Did');
             $table->text('replay');

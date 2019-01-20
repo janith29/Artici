@@ -13,7 +13,7 @@ class CreateReset extends Migration
      */
     public function up()
     {
-        Schema::create('Reset', function (Blueprint $table) {
+        Schema::create('reset', function (Blueprint $table) {
             $table->increments('id');
             $table->string('Email');
             $table->string('Q1');

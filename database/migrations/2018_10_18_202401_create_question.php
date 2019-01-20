@@ -13,7 +13,7 @@ class Createquestion extends Migration
      */
     public function up()
     {
-        Schema::create('Resetquestion', function (Blueprint $table) {
+        Schema::create('resetquestion', function (Blueprint $table) {
             $table->increments('id');
             $table->string('Question');
             $table->string('type');
