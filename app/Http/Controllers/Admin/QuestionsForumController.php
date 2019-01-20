@@ -136,6 +136,7 @@ class QuestionsForumController extends Controller
         $replyA->replay = $request->get('replye');
         $replyA->replier_ID = $request->get('relier');
         $replyA->questionId = $request->get('q_id');
+        $replyA->Did = $name;
         $replyA->save();
         $replys = DB::select('select * from service ORDER BY id DESC LIMIT 1');
         $type=$file->guessExtension();
@@ -156,6 +157,7 @@ class QuestionsForumController extends Controller
         $replyA->replier_ID = $request->get('relier');
         $replyA->questionId = $request->get('q_id');
         $replyA->replay_pic=$name;
+        $replyA->Did = $name;
         $replyA->save();
         return view('admin.question_forum.success');  }
     /**
