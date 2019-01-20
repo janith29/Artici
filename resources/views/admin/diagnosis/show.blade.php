@@ -16,7 +16,15 @@
                         <div id="caption"></div>
                       </div>
                 </tr>
+                @php
                 
+use Illuminate\Support\Facades\DB;
+                $diagnosise = DB::select('select * from patient where id ='.$diagnosis->patientname );
+          foreach($diagnosise as $diagnosiss)
+          {
+            $diagnosis->patientname=$diagnosiss->name;
+          }
+          @endphp
                
                 <tr>
                     <th>Patient name</th>
@@ -81,7 +89,6 @@
             </tbody>
         </table>
         @php
-        use Illuminate\Support\Facades\DB;
         $DSphoto =DB::select('select * from diagnosisphoto WHERE diagnosis_ID ='.$diagnosis->id.'');  
         
         @endphp

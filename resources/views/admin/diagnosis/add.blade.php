@@ -30,25 +30,25 @@ $services = Service::all();
                 <option  disabled>*****Orthosis*****</option>
                 @foreach($services as $service)
                 @if (($service->type)==="orthosis")
-                    <option value={{$service->serviceName." (orthosis)"}}>{{$service->serviceName}}</option>
+                    <option value={{$service->serviceName."(orthosis)"}}>{{$service->serviceName}}</option>
                 @endif
                 @endforeach 
                 <option  disabled>****Prosthesis****</option>
                 @foreach($services as $service)
                 @if (($service->type)==="prosthesis")
-                    <option value={{$service->serviceName." (prosthesis)"}}>{{$service->serviceName}}</option>
+                    <option value={{$service->serviceName."(prosthesis)"}}>{{$service->serviceName}}</option>
                 @endif
                 @endforeach 
                 <option  disabled>*****Cosmetic*****</option>
                 @foreach($services as $service)
                 @if (($service->type)==="cosmetic")
-                    <option value={{$service->serviceName." (cosmetic)"}}>{{$service->serviceName}}</option>
+                    <option value={{$service->serviceName."(cosmetic)"}}>{{$service->serviceName}}</option>
                 @endif
                 @endforeach 
                 <option  disabled>*****Children******</option>
                 @foreach($services as $service)
                 @if (($service->type)==="children")
-                    <option value={{$service->serviceName." (children)"}}>{{$service->serviceName}}</option>
+                    <option value={{$service->serviceName."(children)"}}>{{$service->serviceName}}</option>
                 @endif
                 @endforeach 
                 

@@ -20,6 +20,15 @@ class DiagnosisController extends Controller
     public function index(Request $request)
     {
         $diagnosise=Diagnosis::all();
+        foreach($diagnosise as $diagnosisse)
+          {
+              $IDDID=$diagnosisse->patientname;
+            $diagnosis = DB::select('select * from patient where id ='.$IDDID);
+          foreach($diagnosis as $diagnosiss)
+          {
+            $diagnosisse->patientname=$diagnosiss->name;
+          }
+        }
         return view('admin.diagnosis.index',compact('diagnosise') );
         
     }
@@ -81,7 +90,7 @@ class DiagnosisController extends Controller
 
         $name=$lastid."sketch.".$type;
         $file->move('image/diagnosis/sketch',$name);
-        $diagnosis->patientname = $request->get('name');
+        $diagnosis->patientname = $request->get('ID');
         $diagnosis->service = $request->get('pa_service');
         $diagnosis->hight = $request->get('pa_height');
         $diagnosis->weight = $request->get('pa_weight');
