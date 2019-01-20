@@ -6,6 +6,7 @@ use App\Models\Patient;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use App\Models\Service;
 class PatientController extends Controller
 {
     /**
@@ -52,8 +53,8 @@ class PatientController extends Controller
      */
     public function servicesi()
     {
-        $services = DB::select('select * from service');
-        return view('patient.services.index',compact('services'));
+        $services = Service::all();
+        return view('patient.services.index', compact('services'));
     }
     public function searchservice(Request $request )
     {

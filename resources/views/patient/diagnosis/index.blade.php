@@ -13,7 +13,7 @@ $IDpa = 0;
             $IDpa=$ID->id;
             
         }
-        $diagnosise = DB::select('select * from diagnosis where id ='.$IDpa);
+        $diagnosise = DB::select('select * from diagnosis where patientname ='.$IDpa);
         $patientname='n';
             $service='n';
             $consultant_dr='n';
@@ -34,7 +34,7 @@ $IDpa = 0;
             <th>Patient name</th>
             <th>Service</th>
             <th>Doctor name</th>
-            <th>Actions</th>
+            <th>Actions{{ $IDpa}}</th>
         </tr>
         </thead>
         <tbody>
@@ -45,16 +45,9 @@ $IDpa = 0;
                 <td>{{ $diagnosis->service }}</td>
                 <td>{{ $diagnosis->consultant_dr }}</td>
                 <td>
-                    <a class="btn btn-xs btn-primary" href="{{ route('admin.diagnosis.show',[$diagnosis->id]) }}">
+                    <a class="btn btn-xs btn-primary" href="{{ route('patient.diagnosis.show',[$diagnosis->id]) }}">
                         <i class="fa fa-eye"></i>
                     </a>
-                    <a class="btn btn-xs btn-info" href="{{ route('admin.diagnosis.edit',[$diagnosis->id]) }}">
-                        <i class="fa fa-pencil"></i>
-                    </a>
-                    <a class="btn btn-xs btn-danger" href="{{ route('admin.diagnosis.delete',[$diagnosis->id]) }}">
-                        <i class="fa fa-trash"></i>
-                    </a>
-                    
                 </td>
             </tr>
             @endforeach

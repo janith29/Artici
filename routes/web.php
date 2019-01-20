@@ -437,7 +437,7 @@ Route::group(['prefix' => 'pno', 'as' => 'pno.', 'namespace' => 'employee\pno', 
 Route::group(['prefix' => 'patient', 'as' => 'patient.', 'namespace' => 'patient', 'middleware' => 'patient'], function () {
     // Dashboard
     Route::get('diagnosis', 'PatientController@patientint')->name('diagnosis.index');
-
+    Route::get('diagnosis/{diagnosis}', 'DiagnosisController@show')->name('diagnosis.show');
     Route::get('/', 'PatientDashboardController@index')->name('dashboard');
     
     //Employee
@@ -447,7 +447,11 @@ Route::group(['prefix' => 'patient', 'as' => 'patient.', 'namespace' => 'patient
     //appointment
     Route::get('appointments', 'AppointmentController@index')->name('appointments');
     Route::get('appointments/add', 'AppointmentController@create')->name('appointments.add');
-    
+    Route::post('appointments/store', 'AppointmentController@store')->name('appointments.store');
+    Route::post('appointments/checkDate', 'AppointmentController@checkDate')->name('appointments.checkDate');
+    Route::post('appointments/checkDate/store', 'AppointmentController@store')->name('appointments.checkDate.store');
+   
+    Route::get('appointments/{appointment}', 'AppointmentController@show')->name('appointments.show');
     //question
     Route::get('question_forum', 'PatientController@quindex')->name('question_forum');
     Route::get('question_forum/add', 'QuestionsForumController@create')->name('question_forum.add');
@@ -464,6 +468,7 @@ Route::group(['prefix' => 'patient', 'as' => 'patient.', 'namespace' => 'patient
     Route::get('patient', 'PatientController@index')->name('patients');
     //Services
     Route::get('services', 'PatientController@servicesi')->name('services');
+    
     //doctor
     Route::get('doctors', 'PatientController@doctors')->name('doctors');
     
