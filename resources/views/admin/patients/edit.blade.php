@@ -24,10 +24,7 @@
                 <label for="inputAddress">NIC</label>
                 <input type="text" name="nic" class="form-control" id="inputAddress" value="{{ $patient->nic }}">
             </div>
-            <div class="form-group">
-                <label for="inputAddress">E-mail</label>
-                <input type="text" name="email" class="form-control" id="inputAddress" value="{{ $patient->email }}">
-            </div>
+            
             <div class="form-group">
                     <label for="address">Address *</label>
                     <textarea class="form-control" name="address" id="address" cols="30" rows="10" placeholder="Patient Address"> {{ $patient->address }}</textarea>

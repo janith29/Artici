@@ -84,7 +84,7 @@ class PatientController extends Controller
         $customMessages = [
             'name.regex' => 'Name cannot contain numbers and special characters',
             'nic.digits' => 'NIC must contains only 9 numbers',
-            'email' => 'Patient already in the system'
+            'unique_patient_check' => 'This email already in the system'
         ];
         $this->validate($request, $validatedData, $customMessages);
 
@@ -179,22 +179,14 @@ class PatientController extends Controller
     {
 
         $validatedData = $request->validate([
-            // 'id' => 'required',
-            // 'nic' => 'required',
-            //'name' => 'required|string',
             'name'     => 'required|regex:/^[\pL\s\-]+$/u',
-            'nic' => 'required|regex:/[0-9]{9}[V-v]/',
+            'nic' => 'required|regex:/[0-9]{9}/',
             'address' => 'required',
-            'email' => 'required|email',
-
-            //'mobile' => 'required|min:11|numeric',
             'mobile' => 'required|regex:/(0)[0-9]{9}/'
 
-            // 'birthday' => 'required'
         ]);
         $patient->name = $request->get('name');
         $patient->nic = $request->get('nic');
-        $patient->email = $request->get('email');
         $patient->address= $request->get('address');
 
         $patient->mobile = $request->get('mobile');

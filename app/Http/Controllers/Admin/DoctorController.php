@@ -51,8 +51,25 @@ class DoctorController extends Controller
         });
         
         
-        $validatedData = $request->validate([
+        // $validatedData = $request->validate([
 
+        //     'name'     => 'required|regex:/^[\pL\s\-]+$/u',
+        //     //'nic' => 'required|regex:/[0-9]{9}[V-v]/',
+        //     //'address' => 'required',
+        //     'doc_pic' => 'required',
+        //     'hospital' => 'required|regex:/^[\pL\s\-]+$/u',
+
+
+        //     'email' => 'required|email',
+
+        //     //'mobile' => 'required|min:11|numeric',
+        //     'mobile' => 'required|regex:/(0)[0-9]{9}/',
+        //     'email' => "uniqueDoctorCheck:{$request->email}"
+
+        //     // 'birthday' => 'required'
+        // ]);
+
+        $validatedData =[
             'name'     => 'required|regex:/^[\pL\s\-]+$/u',
             //'nic' => 'required|regex:/[0-9]{9}[V-v]/',
             //'address' => 'required',
@@ -66,8 +83,11 @@ class DoctorController extends Controller
             'mobile' => 'required|regex:/(0)[0-9]{9}/',
             'email' => "uniqueDoctorCheck:{$request->email}"
 
-            // 'birthday' => 'required'
-        ]);
+        ];
+        $customMessages = [
+            'unique_doctor_check' => 'This email already in the system'
+        ];
+        $this->validate($request, $validatedData, $customMessages);
         $time =Carbon::now()->format('Y-m-d H:i:s');
         $file=$request ->file('doc_pic');
 
@@ -155,16 +175,31 @@ class DoctorController extends Controller
 
     public function update(Request $request, Doctor $doctor)
     {
-        $validatedData = $request->validate([
+        // $validatedData = $request->validate([
+        //     'name'     => 'required|regex:/^[\pL\s\-]+$/u',
+        //     'hospital' => 'required|regex:/^[\pL\s\-]+$/u',
+        //     'email' => 'required|email',
+        //     'mobile' => 'required|regex:/(0)[0-9]{9}/'
+
+        // ]);
+        Validator::extend('uniqueDoctorCheck', function ($attribute, $value, $parameters, $validator) {
+            $count = DB::table('users')->where('email', $value)->count();
+        
+            return $count === 0;
+        });
+
+        $validatedData =[
             'name'     => 'required|regex:/^[\pL\s\-]+$/u',
             'hospital' => 'required|regex:/^[\pL\s\-]+$/u',
-            'email' => 'required|email',
             'mobile' => 'required|regex:/(0)[0-9]{9}/'
 
-        ]);
+        ];
+        $customMessages = [
+            'unique_doctor_check' => 'This email already in the system'
+        ];
+        $this->validate($request, $validatedData, $customMessages);
         $doctor->name = $request->get('name');
         $doctor->hospital = $request->get('hospital');
-        $doctor->email = $request->get('email');
         $doctor->mobile = $request->get('mobile');
 
         $doctor->save();

@@ -70,7 +70,7 @@ class EmployeeController extends Controller
             'nic.digits' => 'NIC must contains only 9 numbers',
             'birthday.before' => 'Funny! Birthday can not be today or future',
             'address.regex' => 'Address cannot contain special characters like # . @',
-            'email' => 'Employee already in the system'
+            'unique_employee_check' => 'This email already in the system'
         ];
 
         $this->validate($request, $validatedData, $customMessages);
