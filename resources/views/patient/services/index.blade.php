@@ -30,15 +30,9 @@
                                 <img class="imgdis" id={{ $service->id }} onclick="displayIMG(this.id)"  src="\image\service\item\{{ $service->pic }}" alt="Snow" style="height:auto;width:auto;max-width:200px;max-height:200px;"></p>
                             <h4 align="center">{{ $service->serviceName }}</h4></div>
                       <p >{{ $service->description }}</p>
-                      <a class="btn btn-xs btn-primary" href="{{ route('admin.services.show',[$service->id]) }}">
-                            <i class="fa fa-eye"></i>
-                        </a>
-                        <a class="btn btn-xs btn-info" href="{{  route('admin.services.edit',[$service->id]) }}">
-                            <i class="fa fa-pencil"></i>
-                        </a>
-                        <a class="btn btn-xs btn-danger" href="{{ route('admin.services.delete',[$service->id]) }}">
-                            <i class="fa fa-trash"></i>
-                        </a>
+                      
+                        
+                        
                 </div>
               </div>
             
@@ -65,15 +59,7 @@
                          <img class="imgdis" id={{ $service->id }} onclick="displayIMG(this.id)"  src="\image\service\item\{{ $service->pic }}" alt="Snow" style="height:auto;width:auto;max-width:200px;max-height:200px;"></p>
                     <h4 align="center">{{ $service->serviceName }}</h4></div>
               <p >{{ $service->description }}</p>
-              <a class="btn btn-xs btn-primary" href="{{ route('admin.services.show',[$service->id]) }}">
-                    <i class="fa fa-eye"></i>
-                </a>
-                <a class="btn btn-xs btn-info" href="{{  route('admin.services.edit',[$service->id]) }}">
-                    <i class="fa fa-pencil"></i>
-                </a>
-                <a class="btn btn-xs btn-danger" href="{{ route('admin.services.delete',[$service->id]) }}">
-                    <i class="fa fa-trash"></i>
-                </a>
+              
         </div>
       </div>
     
@@ -98,15 +84,7 @@
                         <img class="imgdis" id={{ $service->id }} onclick="displayIMG(this.id)"  src="\image\service\item\{{ $service->pic }}" alt="Snow" style="height:auto;width:auto;max-width:200px;max-height:200px;"></p>
                     <h4 align="center">{{ $service->serviceName }}</h4></div>
               <p >{{ $service->description }}</p>
-              <a class="btn btn-xs btn-primary" href="{{ route('admin.services.show',[$service->id]) }}">
-                    <i class="fa fa-eye"></i>
-                </a>
-                <a class="btn btn-xs btn-info" href="{{  route('admin.services.edit',[$service->id]) }}">
-                    <i class="fa fa-pencil"></i>
-                </a>
-                <a class="btn btn-xs btn-danger" href="{{ route('admin.services.delete',[$service->id]) }}">
-                    <i class="fa fa-trash"></i>
-                </a>
+             
         </div>
       </div>
     
@@ -131,15 +109,7 @@
                          <img class="imgdis" id={{ $service->id }} onclick="displayIMG(this.id)"  src="\image\service\item\{{ $service->pic }}" alt="Snow" style="height:auto;width:auto;max-width:200px;max-height:200px;"></p>
                     <h4 align="center">{{ $service->serviceName }}</h4></div>
               <p >{{ $service->description }}</p>
-              <a class="btn btn-xs btn-primary" href="{{ route('admin.services.show',[$service->id]) }}">
-                    <i class="fa fa-eye"></i>
-                </a>
-                <a class="btn btn-xs btn-info" href="{{  route('admin.services.edit',[$service->id]) }}">
-                    <i class="fa fa-pencil"></i>
-                </a>
-                <a class="btn btn-xs btn-danger" href="{{ route('admin.services.delete',[$service->id]) }}">
-                    <i class="fa fa-trash"></i>
-                </a>
+              
         </div>
       </div>
     

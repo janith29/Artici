@@ -429,8 +429,11 @@ class FinancialController extends Controller
     public function searchinvoice(Request $request)
     {
       
-        $Invoices = DB::select('select * from invoice where id ='.$request['search']);
-        
+        $Invoices = DB::table('invoice')
+        ->where('id', $request['search'])
+        ->orWhere('patient_ID', 'like', '%' . $request['search'] . '%')
+        ->orWhere('Did', 'like', '%' . $request['search'] . '%')
+        ->get();
         $patients=patient::all();
         return view('admin.financial.index_invoice',['Invoices' => $Invoices],compact('patients'));
     
