@@ -148,12 +148,17 @@
                                   <div class="form-group">
                                     <label for="pwd">Password:</label>
                                     <input id="password" type="password" class="form-control" name="password"
-                                    placeholder="{{ __('views.auth.login.input_1') }}" required></div>
+                                    placeholder="{{ __('views.auth.login.input_1') }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="checkbox" onclick="myFunction()">Show Password
+                                </div>
                                   <div class="checkbox">
                                     <label>
                                             <input type="checkbox"
                                             name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('views.auth.login.input_2') }}
                                     </label>
+
                                   </div>
                                   @if (session('status'))
                             <div class="alert alert-success">
@@ -186,7 +191,17 @@
                                 </div>
                                     
                                     
-                                            
+                       
+<script>
+    function myFunction() {
+      var x = document.getElementById("password");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+    </script>                     
                                 
     
 @endsection

@@ -56,6 +56,7 @@ Route::group(['namespace' => 'Auth'], function () {
  * Backend routes
  */
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => 'administrator'], function () {
+   
     Route::post('financial/bill/printbill', 'FinancialController@printbill');
     Route::post('financial/index_invoice/printinvoice', 'FinancialController@printinvoice');
     Route::get('financial/InReport','FinancialController@incomereport')->name('financial.IncomeReport');
@@ -74,10 +75,23 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('storereport', 'StoreController@displayReport');
     
     Route::post('financial/searchinvoice','FinancialController@searchinvoice');
-    
     Route::post('financial/searchbillin','FinancialController@searchbillin');
     Route::post('financial/searchbill','FinancialController@searchbill');
     Route::post('financial/add_salary/addsalary','FinancialController@salary');
+
+    //quotation
+    Route::get('quotation','QuotationController@index')->name('quotation');
+    Route::get('quotation/add', 'QuotationController@create')->name('quotation.add');
+    Route::post('quotation/addquotation', 'QuotationController@store');
+    Route::get('quotation/show/{quotation}', 'QuotationController@show')->name('quotation.show');
+    Route::get('quotation/delete/{quotation}', 'QuotationController@destroy')->name('quotation.delete');
+    Route::get('quotation/edit/{quotation}', 'QuotationController@edit')->name('quotation.edit');
+    
+    Route::post('quotation/edit/updatequotation', 'QuotationController@update');
+    Route::post('quotation/show/printQuotation', 'QuotationController@print');
+   
+    Route::post('searchQuotation','QuotationController@search');
+    Route::post('quotation/delete/deletequotation', 'QuotationController@sedelete');
     //Employee
     Route::get('employees', 'EmployeeController@index')->name('employees');
     Route::get('employees/add', 'EmployeeController@create')->name('employees.add');
