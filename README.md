@@ -1,111 +1,84 @@
-# Smart Medical Report Analyzer (2020-091)
+# 2020-051
 
-[![HitCount](http://hits.dwyl.com/janithRS/diabipal-app.svg)](http://hits.dwyl.com/janithRS/diabipal-app)
-[![version](https://img.shields.io/badge/version-1.0.2-yellow.svg)](https://semver.org)
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/janithRS/diabipal-app/issues)
-[![Website shields.io](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://janithrs.github.io/cdap-diabipal-web/)
-[![Made withJupyter](https://img.shields.io/badge/Made%20with-Jupyter-orange?style=for-the-badge&logo=Jupyter)](https://jupyter.org/try)
+**Main Objective**
 
-This project is developed associated with an ongoing research at Sri Lanka Institute of Information Technology 
+To propose a system that increases the efficiency of the blood bank management system.
 
-*Predicting Diabetes Mellitus Using Machine Learning and Optical Character Recognition*
+**Main Research Questions**
 
-Diabetes is one of the most common chronic, incurable diseases at present. Currently, diabetes is diagnosed in more than 8% of the adult population (age 20–79 years) and leads to major cardiovascular diseases, which are very common among diabetic patients. Recent predictions report that this number can increase to 55% within two decades, which also raises the mortality rate caused by the disease. If not treated properly, it might become a gateway to other major chronic diseases. The early detection of pre-diabetic conditions can prevent the advancement of Diabetes Mellitus(DM). Typically, a sample of blood, urine, or other bodily fluids are taken by medical laboratories for tests to diagnose or monitor diseases. For diabetes, mostly blood samples are taken into consideration. Most of the patients lack the knowledge of their conditions, symptoms, and medications. Thus, each time they
-must visit a doctor to get their laboratory test results analyzed. Transferring such paper-based medical data into digital documents seems a crucial task as the technology grows day by day.
-This research work focuses on managing DM using machine learning techniques and Optical Character Recognition. In this work, the Random Forest machine learning algorithm is used and evaluated on the datasets to find the prediction of diabetes and Logistic Regression algorithm is implemented to predict the probability of cardiovascular diesease diagnosis. Image processing algorithms and Tesseract Optical Character Recognition (Tesseract OCR) engines are used to extract data from medical reports. A Knowledge Graph (KG) is used to improve the accuracy of the data obtained.
+A blood bank is a very important organization in any country. Maintaining enough blood in the bank, organizing blood donation campaigns, matching the suitable donor for blood transfusions and securing blood distribution processes are some of the main functions handled by the blood bank. Generally, the doctors at the blood bank have an idea of how much blood they need for a given period of the year. However, there is no systematic way to predict the requirement. And, when there is a scarcity of blood in a particular area, there is no systematic way to predict such situations. Even though there might be several donors matching with recipient blood type and all medical requirements, we must consider several factors when selecting the best donor such as distance between donor and recipient, the last time of donation, age, blood group. Sometimes there might be a requirement where we need to maintain the privacy of blood distribution process, and currently, there are no security measurements taken. Furthermore, when organizing a blood camp, it is very difficult to select a suitable area for the campaigns due to transportation difficulty, lack of donors.
 
-### Group Members
-    
-| Name | IT Number |
-| ------ | ------ |
-| W.A.J.R Silva | IT17111270 |
-| H.M.K Shirantha | IT17127288 |
-| R.A.D.V.K Ranasinghe | IT17111898 |
-| L.J.M.V.N Balalla | IT17109918 |
-| N. Kuruwitaarachchi | Supervisor |
-| D. Kasthurirathne | Co-Supervisor |
+According to the research gap, it was discovered that these research questions will cover the entire scope of the proposed system.
 
-### High Level Architecture Diagram
+* How to predict future blood demand?
+* How to organize blood donation campaigns in an effective manner?
+* How to find and notify the most appropriate blood donors in a critical situation?
+* How to Secure the blood distribution process?
 
-<div align="center">
-  <img src="diabipal/resources/hlad.png" />
-</div>
+**Individual Research Questions**
 
-### Research Questions
-- Is it possible to analyze a medical report using machine learning and image processing?
-- What are the key factors that contribute the learning process of a ‘supervised learning method’ using machine learning?
-- How to improve an existing optical character recognition system by investigating the current drawbacks?
-- How can a patient communicate with a physician on a virtual environment?
+    1. Predict the blood demand for the future
 
-### Research Objectives
-#### Main Objective  
-This research mainly focuses on developing a mobile application that can 
-diagnose diabetes by analyzing a medical report. Condition of the disease 
-will be predicted to patients to control diabetes, efficiently and 
-effectively. This application will track all the previous reports of that 
-patient and other conditions of them to give information about their current
-stage. Also, from records, the application will predict the future risks 
-that can be caused to the patient. The application helps the patient to 
-connect and communicate with doctors and get the necessary information
-as well.
-    
-#### Specific Objectives 
 
- - Accurately extract the data from a report and assigned to medical terms.
- 
-    >This research component is implemented to read diabetes related medical lab reports using OCR engines and image processing techniques. Few of the drawbacks of current systems are having the user to enter report results manually to the system, OCR engines failing to identify medical terms. And these problems can be tackled by using OpenCV, Tesseract OCR and knowledge graphs.
-	
-	- Use image processing techniques to enhance the image quality
-	- Use Tesseract OCR engine to extract data from medical lab reports
-	- Implement a knowledge graph with diabetes realted medical terms
-	- Use the knowledge graph to improve the accuracy of the words extracted by the OCR engine
-	
-        
- - Implement a machine learning model to predict diabetes and provide recommendations.
- 
-    >The main objective of this individual research component is to analyze and implement a machine learning model that can predict diabetes of an individual based on his/her medical report(s) related to blood sugar. Based on the research gap identified from the existing literature, it was found that the accuracy of the existing diabetes diagnosis can be improved using optimization techniques. A comprehensive analysis report will be generated after the process of the individual component including nutrition, physical, sleep, behavioral and smoking suggestions. 
-   
-    - To implement a machine learning model to diagnose/ predict diabetes
-    - To provide suggestions analyzing the data inputs with AACE/ACE Prediabetes Algorithm and Glycemic Control Algorithm
-    - To provide nutrition suggestions based on the outcomes of the machine learning model
-    - To provide physical/exercise suggestions based on the outcomes of the machine learning model
-    - To provide sleep routine suggestions based on the outcomes of the machine learning model
-    - To provide a lifestyle behavioral pattern suggestions based on the outcomes of the machine learning model
-    - To provide smoking suggestions for smokers based on the outcomes of the machine learning model  
+Usage of Blood in the medical sector is growing day by day regressively. To match the blood demand to be requested in the future planning it plays a vital role. To obtain optimal planning, authorities have focused on forecasting using the available historical data over the past 10 years. Although those data can be modelled to predict the future demand it’s clear that Blood bank never expected today’s requirement 10 years ago. Therefore, using old techniques to predict future needs is not fruitful. Data which are older than 10 years are mainly recorded in the manual state which creates a huge problem to digitize them as some values are missing.
 
- - Predict the probability of a cardio-vascular diseases and medical suggestions based on patients' data
-	
-	>	This research component aims to bridge the gap between diabetes prevalence and the developement towards cardiovascular diseases.Prrvalence of longterm diabetes consition leads to the development of cardiovascular diseases. Most of the patients death are a cause due to these non-communicable diseases.Most of the diabetes patients are unaware of these conditions and tend to ignore the medical suggestions. 
+Compared to the industrialization of the today’s world people face for many side effects. As a result, people may face accidents, wars and various diseases etc. In these cases, patients required to receive blood transfusions during medical treatments. Blood transfusion must be managed properly because of the importance of blood to a human body. So, if the management authority knows how much blood you need to collect in advance it will be a huge step for the authority. However, today’s blood centers operate on Microsoft excel sheets that include data about the collection of blood and the storage. This is somewhat a manual process which will waste time and money. 
 
-	- Implement a machine learning model to underatand given inputs and predict if the user has a probablity of cardio-vascular disease.
-	- Collect historic data on previous predictions and provide graphical representations 
-	- Calculate the estimated values of BMR based and provide reccomendations for a healthy lifestyle.
-		     
- - Build a human-computer Interaction System to connect
-    the patient, application, and the doctor.
-    
-     >This individual component is implemented to connect the doctor with the patient using a virtual chat interface. Current systems are lacking to reduce the gap between the doctor and the patient in an efficient way. And these problems can be tackled by using Natural Language Processing in the chat interface. 
+This process is not a good method to collect the blood as well as to keep for the storage details. So, it is impossible to manage blood properly in the blood centers. Blood preservation can be as short as 35 days. So, if you collect more blood by not considering the actual demand this valuable blood may be a loss. Similarly, although if the demand is increasing blood centers required to provide the blood as per the requirements. Blood banks need to full fill these requirements in order to provide the best service for the public community as well as the health sector.
+Typically, the amount of blood required for a hospital each year varies from month to month. Therefore, blood campaigners cannot say for certain that a certain amount of blood will be donated to the bank these months. Also, there are different types of blood groups. Different blood types are required from month to month. To complete the unbearable blood requirement authorities have focused on more forecasting, which can predict the amount of blood required for the future.   
 
-    - Read the patient question through chat interface and pass it to NLP for categorize whether it should answer through machine learning or send to a doctor.
-    - Questions that can be answer through ML will go through training data to find the most matching answer. 
-    - Questions that cannot answer through ML are send  to a doctor through E-mail with patient’s information
-    - Email service is running to gather replies from doctors and add to the database with dividing the content separately
-    - Best suitable doctor will be selected based on user’s medical condition and symptoms. 
-        
- 
+    2. Recommend location for future blood donation campaigns using GIS 
+
+Compared to the past people are more prone to illnesses and accidents which leads to people facing low blood levels. During such situations, a specific blood type should be taken from a party with a similar blood type. The blood bank stores blood for that purpose. Currently, blood donation campaigns are being organized by various organizations for this type of blood collection.
+Generally, blood donation campaigns are organized in different areas in the division. There may have been two campaigns simultaneously. In this case, one campaign may experience an exceeding amount of the donors while the other campaign experience a low number rate of donors from that relevant area. The campaign, which was attended by a small number of donors will find it difficult as the organizing committee is unable to reach their blood-gathering target. As a result, a stable solution has not yet been proposed to the organizers of any blood donation campaigns.
+
+    3. Finding the best donor for the blood transfusion
+
+Currently, in the world, there are significant dead happened because of lack of blood in the blood bank. Every two seconds, someone in the U.S. needs blood, and more than 50,000 units of blood are needed each year at Cedars-Sinai alone. More than 38,000 blood donations are needed every day in America. 4.5 million Americans would die each year without life-saving blood transfusions. In the case of emergency, such as accident, natural disasters, bomb blast there could be a lot of patients who need blood. This could occur even at emergency surgeries. If patients need blood, and the blood classification is lost in the blood donation centre, the blood donation centre does not currently have an easy-to-find method.
+Currently, the blood donation centre has no method to find the best donors. In an emergency situation, the blood donation centre has to publish the situation through society and inform about it to the people. Then donors can come to the blood donation centre and donate blood. It might take a lot of time and the patients might be affected by that.
+As a solution for this, the AIMA system has to cover the requirements of finding the best donors to inform them and getting their response.The relevant data set is processed by using the data engineering recommendation algorithm and best suitable results are selected. After that, the relevant donors will be informed using Twilio communication API. 
+
+    4. Secure the blood supply chain
+
+Blood transfusion form is a form that is used, when the blood is to be collected from a particular donor to the patient. Fake blood transfusion forms are everywhere in the world which causes deception of blood. They are illegal and cause harm to the reputations. There are fake blood banks providing these services and also illegal doctors pretending to be legal to give those kinds of forms for money. This is the worst case in India and Middle East countries.
+
+The blood distribution process happens in an unarranged manner. Also, the blood transactions between blood and the hospital are not much secured. Because of the blood deceptions done by unauthorized people .those can steal the blood packets and use them for selling in the markets for a high price. As blood has a really high cost and value in other countries. Due to that, there is a high tendency in receiving blood in an inappropriate manner by filling fake details of patients and requesting from the blood bank. Donors donate blood for a cost unlike in Sri Lanka. 
+
+Also, when they receive blood by these fake methods they sell these blood packets for money in illegal markets. For example Illegal market for blood in INDIA, India's lack of a central blood collection agency, along with taboos against exchanging blood with people of different castes, largely accounts for the shortage, experts say. It fuels a vast illegal market, despite a 1996 Supreme Court ruling that banned paid donors and unlicensed blood banks. Demand still outstrips supply. Private blood banks are legal as long as they obtain a government license for $120 (£80).
+
+That is the purpose where blockchain-based our platform brings a solution for the above issues. In our proposed resolution, the transfusion forms are in digital format, at the same time it's secured by the security of blockchain implicitly. Therefore, the authenticity and integrity of the blood transfusion forms are never challenged.
+
+**Individual Objectives**
+
+    1. Predict the blood demand for the future
+
+Indeed, the demand for blood is a major source of uncertainty, that’s why it is fundamental to understand past, present and future demand of a wide variety of blood product. Accordingly, managers should focus on the implementation of efficient techniques. This consist of forecasting in order to control shortage and availability of blood components, reduce wastage and product expiration, decrease blood inventory levels, and control other related costs.  Hence the importance of using accurate forecasting systems.
+
+    2. Recommend location for future blood donation campaigns using GIS 
+
+The organizers of Blood Donation Campaigns would be able to map out the most effective location for the next blood donation campaign. Organizers would be able to achieve a higher number of donors after developing the system.
+
+    3. Finding the best donor for the blood transfusion
+
+This research focuses on analysing and implementing a system to find the best blood donors in an emergency situation. Then inform them about the situation and get their response as soon as possible.
+
+    4. Secure the blood supply chain
+
+The main objective of this is to identify the problems in current physical transfusion form in the blood distribution process and identify how technologies and concepts can be used to overcome the problems. The blockchain concept is used as decentralized architecture to the blood transfusion form offering anonymity, longevity, integrity, transparency, and immutability to the information.
+
+
 ### Code Structure
-Since the individual components have their own code structures in this GitLab Repository the system is categorized in 
+Since the individual components have their own code structures in this GitLab Repository the system is categorized in
 folders. The specification is given below.
 
 | Folder Name | Author | Description |Technologies Used |
 | ------ | ------ | ------ | ------ |
-| IT17111270 | IT17111270 | This folder contains the source code of the machine learning model which was developed to predict diabetes and the Flask API backend | Flask, Python Notebook, Scikit, Pickle |
-| IT17127288 | IT17127288 | This folder containd the source code od the machine learning model developed to predict the probabilit of being diagnosed with cardiovascular diseases and the Flask API backend | Flask, Python, Scikit, Pickle  |
-| IT17111898 | IT17111898 | This folder contains the source code of the pre-processing and post-processing subsytems that reads the medical report | Image processing, Tesseract OCR, Flask, Python|
-| IT17109918 | IT17109918 | This folder contains two parts. first one contains Spring Boot application of the chat system and the other one is a Flask application to suggest the best doctor | Spring Boot, Java, Flask, Python, Pickle, MySQL |
-| diabipal | All Members | This folder contains the source code of the front end mobile application 'Diabipal' | Ionic-Angular, Typescript, Firebase, Firestore |
-
-##### Please visit our [GitHub Repository](https://github.com/janithRS/diabipal-app) to view the full commit history on the mobile application
+| IT16113664 | IT16113664 | | Flask, Jupyter Notebook, HTML, CSS ,Python ,SQL lite |
+| IT17061780 | IT17061780 | | Flask, Jupyter Notebook, HTML, CSS ,Python ,SQL lite |
+| IT17110280 | IT17110280 | | Flask, Jupyter Notebook, HTML, CSS ,Python ,SQL lite |
+| IT17073974 | IT17073974 | | Flask, HTML, CSS ,Python |
+| website/aima/blockchain | | NodeJs |
+| website/aima/project | All Members | | Flask, Jupyter Notebook, HTML, CSS ,Python ,SQL lite |
 
 ### How to run the code?
 
@@ -113,18 +86,9 @@ The below table describes how to run separate backend applications individually.
 
 | Folder Name | Author | Application | Steps |
 | ------ | ------ | ------ | ------ |
-| IT17111270 | IT17111270 | Flask API backend of Diabetes Prediction Model | Run the command 'flask app.py' |
-| IT17127288 | IT17127288 | Flask API backend of Cardiovascular disease Prediction Model | Run the command 'flask app.py' |
-| IT17111898 | IT17111898 | Flask APIs for Pre-processing and Post-processing | Run the command 'flask app.py'|
-| IT17109918 | IT17109918 | Spring Boot backend of chat application and Flask backend of doctor suggestion system | Run the Command 'mvn spring-boot:run' to run spring boot application and run the command 'flask run' to run Flask application |
-| diabipal | All Members | Mobile Application 'Diabipal' | Run the command 'npm install' and 'ionic serve' |
-  
- ### Deployed machine learning models can be found in these live Heroku applications
- 
- | Application | Source Repository | Author | API |
- | ------ | ------ | ------ | ------ |
- | Image Processing Subsytem | [GitHub](https://github.com/kalnar328/Diabipal-OCR)| IT17111898 | [Heroku API](https://diabipal-ocr.herokuapp.com/) |
- | Word Correction Subsystem | [GitHub](https://github.com/kalnar328/DiabiPal-Knowledge-Graph) | IT17111898 | [Heroku API](https://diabipal-knowledge-graph.herokuapp.com/) |
- | Cardiovascular Prediction Model Backend| [GitHub](https://github.com/shirantha97/Cardio-Vascular_detection) | IT17127288 | [Heroku API](https://dry-lake-13859.herokuapp.com/) |
- | Diabetes Prediction Model Backend | [Github](https://github.com/janithRS/diabetes-prevention-system) | IT17111270 | [Heroku API](https://diabipal.herokuapp.com/) |
- | NLP chat system Backend | [Github](https://github.com/vimanga/med-bot-backend) | IT17109918 | [AWS](http://ec2-54-165-166-212.compute-1.amazonaws.com:8080/) |
+| IT16113664 | IT16113664 | Flask API backend of Diabetes Prediction Model | Run the command 'flask app.py' |
+| IT17061780 | IT17061780 | Flask API backend of Cardiovascular disease Prediction Model | Run the command 'flask app.py' |
+| IT17110280 | IT17110280 | Flask APIs for Pre-processing and Post-processing | Run the command 'flask app.py'|
+| IT17073974 | IT17073974 | Spring Boot backend of chat application and Flask backend of doctor suggestion system | Run the Command 'mvn spring-boot:run' to run spring boot application and run the command 'flask run' to run Flask application |
+| website/aima/blockchain | |  |
+| website/aima/project | |  |
