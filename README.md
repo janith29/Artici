@@ -77,7 +77,7 @@ folders. The specification is given below.
 | IT17061780 | IT17061780 | | Flask, Jupyter Notebook, HTML, CSS ,Python ,SQL lite |
 | IT17110280 | IT17110280 | | Flask, Jupyter Notebook, HTML, CSS ,Python ,SQL lite |
 | IT17073974 | IT17073974 | | Flask, HTML, CSS ,Python |
-| website/aima/blockchain | | NodeJs |
+| website/aima/blockchain | IT17073974 | | | NodeJs |
 | website/aima/project | All Members | | Flask, Jupyter Notebook, HTML, CSS ,Python ,SQL lite |
 
 ### How to run the code?
