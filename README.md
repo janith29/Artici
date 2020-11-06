@@ -29,7 +29,7 @@ This research work focuses on managing DM using machine learning techniques and 
 ### High Level Architecture Diagram
 
 <div align="center">
-  <img src="diabipal/resources/hlad.png" />
+  <img src="http://www.aimabank.com/assets/img/blog/system%20diagram.jpg" />
 </div>
 
 ### Research Questions
